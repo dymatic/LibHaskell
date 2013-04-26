@@ -32,4 +32,3 @@ This is a necessity-driven project. When a problem arises in a real application 
 License
 ----------
 I am licensing these libraries under the BJLPL, which is a mostly open source license. Go nuts.
-The only limitation of the BJLPL is that you may not name you project LibHaskell.

@@ -19,7 +19,6 @@ read -p "Copy LibHaskell to PreProcess? [Enter]"
 read -p "Build PreProcess and commit to git?"
   cd ~/Code/Preprocess/
   ~/Code/Preprocess/Build.sh
-  git commit -m "Library ammendment"
   cd ~/Code/LibHaskell
   
 echo "PreProcess successfully built."
@@ -31,7 +30,6 @@ read -p "Copy LibHaskell to StatAnal? [Enter]"
 read -p  "Build StatAnal? [Enter]"
   cd ~/Code/StatAnal
   ~/Code/StatAnal/Build.sh
-  git commit -m "Library ammendment"
   cd ~/Code/LibHaskell
   
 git add *

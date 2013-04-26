@@ -1,5 +1,4 @@
 import LibHaskell.LibLists
-import LibHaskell.LibStrings
 import LibHaskell.Math.LibAlgebra
 import LibHaskell.Math.LibGeometry
 
