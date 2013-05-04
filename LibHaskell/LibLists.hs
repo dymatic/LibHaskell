@@ -34,6 +34,16 @@ module LibHaskell.LibLists(
  ,kill
  ,oneMore
  ,splitOn
+ ,lastx
+ ,flatten
+ ,afterList
+ ,refPos
+ ,cond
+ ,notCond
+ ,contains
+ ,removeLeading
+ ,replaceAll
+ ,replaceAllOf
 ) where
 
 -- For general lists not biased to a type.
@@ -205,6 +215,7 @@ pop (_:xs) = xs
 
 --Grab the first element of a list.
 grab :: [a] -> a
+grab [x] = x
 grab (x:_) = x
 
 --Take the last element of a list.
@@ -247,3 +258,59 @@ splitOn [] _ = []
 splitOn xs c
 	| c `elem` xs = (filterBreak (/= c) xs) : splitOn (after xs c) c
 	| otherwise = xs:[]
+
+--Get the last x elements from a list.
+lastx :: [a] -> Int -> [a]
+lastx []  _ = []
+lastx a@(x:xs) b
+  | (length a) <= b = x : lastx xs b
+  | otherwise = lastx xs b
+
+--Flatten a list of two-part tupples into one list.
+flatten :: [(a,a)] -> [a]
+flatten [] = []
+flatten ((a,b):xs) = a : b : flatten xs
+
+--What comes after the list?
+afterList :: (Eq a)  => [a] -> [a] -> [a]
+afterList a@(x:xs) y
+  | (take (length y) a) == y = (strt xs ((length y) - 1))
+  | otherwise = afterList xs y
+
+--Get the element out of the second list from where it occurs in the first.
+refPos :: (Eq a) => [a] -> [b] -> a -> b
+refPos a b c = b !! (pos a c)
+
+-- Perform a function based on a predicate.
+cond :: (a -> Bool) -> (a -> a) -> a -> a
+cond f1 f2 c = if (f1 c) then (f2 c) else c
+
+--Cond with not applied
+notCond  :: (a -> Bool) -> (a -> a) -> a -> a
+notCond f1 f2 c = if (not (f1 c)) then (f2 c) else c
+
+--Is a list found within a larger list?
+contains :: (Eq a) => [a] -> [a] -> Bool
+contains [] _ = False
+contains a@(x:xs) b
+  | (take (length b) a) == b = True
+  | otherwise = contains xs b
+
+--Remove all elements from the beginning of a list.
+removeLeading ::(Eq a) => [a] -> a -> [a]
+removeLeading [] _ = []
+removeLeading a@(x:xs) b
+  | x == b = removeLeading xs b
+  | otherwise = a 
+
+--Replace all occurences of a match.
+replaceAll :: (Eq a) => [a] -> (a,a) -> [a]
+replaceAll [] _ = []
+replaceAll (x:xs) (a,b)
+  | (x == a) = b : replaceAll xs (a,b)
+  | otherwise = x : replaceAll xs (a,b)
+
+--Replace that uses lists of tupples.
+replaceAllOf :: (Eq a) => [a] -> [(a,a)] -> [a]
+replaceAllOf x [] = x
+replaceAllOf x ((a,b):ys) = replaceAll (replaceAllOf x ys) (a,b)

@@ -38,9 +38,4 @@ git add -u
 read -p "Send LibHaskell to parrotBot? [Enter]"
 rm -rf ~/Code/parrotBot/LibHaskell
 cp -r ./LibHaskell ~/Code/parrotBot/LibHaskell
-
-read -p "Build parrotBot?"
-cd ~/Code/parrotBot
-./Build.sh
-cd ~/Code/LibHaskell
 echo "LibHaskell built, PreProces built, and StatAnal built successfully. Commit all changes to git."
