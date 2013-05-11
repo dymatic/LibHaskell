@@ -7,3 +7,6 @@ cp -R ./LibHaskell ../StatAnal/
 
 rm -rf ../parrotBot/LibHaskell
 cp -R ./LibHaskell ../parrotBot/
+
+rm -rf ../boy/LibHaskell
+cp -R ./LibHaskell ../boy/
