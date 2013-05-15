@@ -10,3 +10,6 @@ cp -R ./LibHaskell ../parrotBot/
 
 rm -rf ../boy/LibHaskell
 cp -R ./LibHaskell ../boy/
+
+rm -rf ../tcmp/LibHaskell
+cp -R ./LibHaskell ../tcmp/
